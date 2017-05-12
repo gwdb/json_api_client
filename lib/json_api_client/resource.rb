@@ -1,6 +1,7 @@
 require 'forwardable'
 require 'active_support/all'
 require 'active_model'
+require 'request_store'
 
 module JsonApiClient
   class Resource
@@ -21,7 +22,6 @@ module JsonApiClient
                     :parser,
                     :paginator,
                     :connection_class,
-                    :connection_object,
                     :connection_options,
                     :query_builder,
                     :linker,
@@ -190,6 +190,14 @@ module JsonApiClient
       end
 
       protected
+
+      def connection_object
+        RequestStore.store[:json_api_client_connection_object]
+      end
+
+      def connection_object=(conn)
+        RequestStore.store[:json_api_client_connection_object] = conn
+      end
 
       # Declares a new class/instance method that acts on the collection/member
       #
