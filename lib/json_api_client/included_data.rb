@@ -28,9 +28,6 @@ module JsonApiClient
         # even if there's no matching record included.
         if data[link_def["type"]]
           data[link_def["type"]][link_def["id"]]
-        else
-          # if there's no matching record in included then go and get it given the data
-          link_def["type"].underscore.classify.constantize.find(link_def["id"]).first
         end
       end
     end

@@ -455,8 +455,8 @@ module JsonApiClient
 
       return nil unless relationship_definitions = relationships[method]
 
+      # Fix for bug: https://github.com/chingor13/json_api_client/issues/218 as per https://github.com/chingor13/json_api_client/pull/244/
       # look in included data
-      # Fix for bug: https://github.com/chingor13/json_api_client/issues/218
       if relationship_definitions.key?("data")
         # included.data_for returns an array, if the association is a has_one, then pick the first, otherise return the whole array
         if association.is_a?(JsonApiClient::Associations::HasOne::Association)
